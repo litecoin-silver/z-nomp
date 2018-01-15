@@ -1403,9 +1403,20 @@ function SetupForPool(logger, poolOptions, setupFinished){
             logger.warning(logSystem, logComponent, 'Invalid address '+address+', convert to address '+(poolOptions.invalidAddress || poolOptions.address));
             return (poolOptions.invalidAddress || poolOptions.address);
         }
-        if (address.length <= 30) {
+        /*if (address.length <= 30) {
             logger.warning(logSystem, logComponent, 'Invalid address '+address+', convert to address '+(poolOptions.invalidAddress || poolOptions.address));
             return (poolOptions.invalidAddress || poolOptions.address);
+        }*/
+
+        if (address.length < 25 || address.length > 34) {
+            return (poolOptions.invalidAddress || (poolOptions.testnet === true ? "" : ""));
+        }
+        if (poolOptions.testnet === true && address[0] !== 'm' && address[0] !== 'n' && address[0] !== '2') {
+            return (poolOptions.invalidAddress || "");
+        }
+
+        if (poolOptions.testnet === false && address[0] !== 's' && address[0] !== 'A') {
+            return (poolOptions.invalidAddress || "");
         }
         return address;
     };
