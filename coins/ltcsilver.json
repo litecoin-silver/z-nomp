@@ -1,5 +1,5 @@
 {
-    "name": "Litecoin Silver",
+    "name": "ltcsilver",
     "symbol": "LTS",
     "algorithm": "equihash",
     "txfee": 0.00005

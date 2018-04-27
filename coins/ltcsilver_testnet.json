@@ -1,5 +1,5 @@
 {
-    "name": "Litecoin Silver Test",
+    "name": "ltcsilver_testnet",
     "symbol": "TTS",
     "algorithm": "equihash",
     "txfee": 0.00005
