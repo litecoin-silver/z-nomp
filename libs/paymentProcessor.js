@@ -735,7 +735,7 @@ function SetupForPool(logger, poolOptions, setupFinished){
                         }
                         var round = rounds[i];
                         // update confirmations for round
-                        round.confirmations = parseInt((tx.result.confirmations || 0));
+                        round.confirmations = parseInt((tx.result)? tx.result.confirmations:0);
                         // look for transaction errors
                         if (tx.error && tx.error.code === -5){
                             logger.warning(logSystem, logComponent, 'Daemon reports invalid transaction: ' + round.txHash);
@@ -952,11 +952,11 @@ function SetupForPool(logger, poolOptions, setupFinished){
                                             totalShares += shares;
                                         }
                                         
-                                        //console.log('--IMMATURE DEBUG--------------');
-                                        //console.log('performPayment: '+performPayment);
-                                        //console.log('blockHeight: '+round.height);
-                                        //console.log('blockReward: '+Math.round(immature));
-                                        //console.log('blockConfirmations: '+round.confirmations);
+                                        console.log('--IMMATURE DEBUG--------------');
+                                        console.log('performPayment: '+performPayment);
+                                        console.log('blockHeight: '+round.height);
+                                        console.log('blockReward: '+Math.round(immature));
+                                        console.log('blockConfirmations: '+round.confirmations);
                                         
                                         // calculate rewards for round
                                         var totalAmount = 0;
@@ -969,7 +969,7 @@ function SetupForPool(logger, poolOptions, setupFinished){
                                             totalAmount += workerImmatureTotal;
                                         }
                                         
-                                        //console.log('----------------------------');
+                                        console.log('----------------------------');
                                         break;
 
                                     /* calculate reward balances */
@@ -1017,12 +1017,12 @@ function SetupForPool(logger, poolOptions, setupFinished){
                                             worker.totalShares = parseFloat(worker.totalShares || 0) + shares;
                                             totalShares += shares;
                                         }
-                                        
-                                        //console.log('--REWARD DEBUG--------------');
-                                        //console.log('performPayment: '+performPayment);
-                                        //console.log('blockHeight: '+round.height);
-                                        //console.log('blockReward: ' + Math.round(reward));
-                                        //console.log('blockConfirmations: '+round.confirmations);
+
+                                        console.log('--REWARD DEBUG--------------');
+                                        console.log('performPayment: '+performPayment);
+                                        console.log('blockHeight: '+round.height);
+                                        console.log('blockReward: ' + Math.round(reward));
+                                        console.log('blockConfirmations: '+round.confirmations);
                                         
                                         // calculate rewards for round
                                         var totalAmount = 0;
@@ -1040,7 +1040,7 @@ function SetupForPool(logger, poolOptions, setupFinished){
                                             totalAmount += workerRewardTotal;
                                         }
 
-                                        //console.log('----------------------------');
+                                        console.log('----------------------------');
                                         break;
                                 }
                             });
@@ -1154,7 +1154,7 @@ function SetupForPool(logger, poolOptions, setupFinished){
                     
                     // perform the sendmany operation .. addressAccount
                     var rpccallTracking = 'sendmany "" '+JSON.stringify(addressAmounts);
-                    //console.log(rpccallTracking);
+                    console.log(rpccallTracking);
 
                     daemon.cmd('sendmany', ["", addressAmounts], function (result) {
                         // check for failed payments, there are many reasons
